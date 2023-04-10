@@ -1,0 +1,19 @@
+name: HardcoreReloaded
+version: '${project.version}'
+main: de.gamexlive.hardcorereloaded.HardcoreReloaded
+api-version: 1.19
+commands:
+  items:
+    description: Items
+  grave:
+    description: Grave
+  radiuschecker:
+    description: radiusChecker
+  setBounty:
+    description: setBounty
+  coins:
+    description: Coins
+  bounties:
+    description: Bounties
+  kleinerHuso:
+    description: kleinerHuso

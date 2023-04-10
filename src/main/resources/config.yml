@@ -1,0 +1,14 @@
+graveyard.X: 0
+graveyard.Y: 64
+graveyard.Z: 0
+spawn.X : 0
+spawn.Y : 64
+spawn.Z : 10
+
+items:
+  Sword:
+  - LEGENDARY
+  - TestName
+  - DIAMOND_SWORD
+
+
