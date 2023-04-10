@@ -71,7 +71,7 @@
                         </goals>
                         <configuration>
                             <createDependencyReducedPom>false</createDependencyReducedPom>
-                            <outputFile>C:\Users\vKimb\Desktop\Server\server\plugins\HardcoreReloaded.jar</outputFile>
+                            <outputFile>C:\Users\Vlad\Desktop\MinecraftPluginIdeas\Server\plugins\HardcoreReloaded.jar</outputFile>
                         </configuration>
                     </execution>
                 </executions>

@@ -1,14 +1,13 @@
 package de.gamexlive.hardcorereloaded.custom.mobs;
 
 import net.minecraft.network.chat.Component;
-import net.minecraft.world.entity.ai.goal.*;
 import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
 import net.minecraft.world.entity.monster.Zombie;
 import net.minecraft.world.entity.player.Player;
+import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.craftbukkit.v1_19_R2.CraftWorld;
-
-import java.util.function.Predicate;
+import org.bukkit.inventory.Inventory;
 
 public class Goblin extends Zombie {
 
@@ -22,27 +21,20 @@ public class Goblin extends Zombie {
         --> EntityDamagedByEntityEvent
      */
 
+   private Inventory inv;
+
+
     public Goblin(Location loc) {
         super(((CraftWorld) loc.getWorld()).getHandle());
         this.setBaby(true);
         this.setPos(loc.getX(), loc.getY(), loc.getZ());
+        this.setHealth(40);
         this.setCustomNameVisible(true);
         this.setCustomName(Component.literal("Kleiner Huso"));
         this.goalSelector.addGoal(0, new NearestAttackableTargetGoal<>(this, Player.class, true));
+        inv = Bukkit.createInventory(null, 9*4, "t");
     }
 
-    public void setCurrentGoal(int goal) {
-        switch (goal) {
-            case 1:
-                this.goalSelector.addGoal(0, new NearestAttackableTargetGoal<>(this, Player.class, true));
-                break;
-            case 2:
-                this.goalSelector.addGoal(0, new AvoidEntityGoal<>(this, Player.class, 15, 1.0D, 1.0D));
-                this.goalSelector.addGoal(1, new PanicGoal(this, 2.0D));
-                this.goalSelector.addGoal(2, new RandomStrollGoal(this, 0.6D));
-                this.goalSelector.addGoal(3, new RandomLookAroundGoal(this));
-                break;
-        }
-    }
+    public Inventory getInventory() {return inv;}
 
 }

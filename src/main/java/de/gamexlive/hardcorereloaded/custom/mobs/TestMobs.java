@@ -9,14 +9,10 @@ import org.bukkit.entity.Player;
 public class TestMobs implements CommandExecutor {
     @Override
     public boolean onCommand(CommandSender commandSender, Command command, String s, String[] strings) {
-        //System.out.println("Allah");
         Player p = (Player) commandSender;
         System.out.println(p.getLocation());
         Goblin g = new Goblin(p.getLocation());
-        System.out.println("1: " + g.getX() + ":" + g.getY() + ":" + g.getZ());
         ((CraftWorld)p.getWorld()).getHandle().addFreshEntity(g);
-        //g.teleportTo(p.getLocation().getX(), p.getLocation().getY(), p.getLocation().getZ());
-        System.out.println("2: " + g.getX() + ":" + g.getY() + ":" + g.getZ());
         return false;
     }
 }
