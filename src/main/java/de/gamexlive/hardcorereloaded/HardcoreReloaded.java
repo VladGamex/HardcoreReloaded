@@ -3,6 +3,7 @@ package de.gamexlive.hardcorereloaded;
 import de.gamexlive.hardcorereloaded.coins.CoinsManager;
 import de.gamexlive.hardcorereloaded.coins.commands.CommandGetCoins;
 import de.gamexlive.hardcorereloaded.custom.events.EventManager;
+import de.gamexlive.hardcorereloaded.custom.events.netherAttack.PortalManager;
 import de.gamexlive.hardcorereloaded.custom.items.ItemManager;
 import de.gamexlive.hardcorereloaded.custom.items.TestCommand;
 import de.gamexlive.hardcorereloaded.custom.mobs.TestMobs;
@@ -32,6 +33,7 @@ public final class HardcoreReloaded extends JavaPlugin {
     public static EventManager eventManager;
     public static Bounty bounty;
     public static CoinsManager cManager;
+    public static PortalManager portalManager;
 
     public void onEnable() {
         this.saveDefaultConfig();
@@ -52,6 +54,7 @@ public final class HardcoreReloaded extends JavaPlugin {
         bounty = new Bounty(grabber);
         eventManager = new EventManager();
         cManager = new CoinsManager(grabber);
+        portalManager = new PortalManager(grabber);
         //Commands
         this.getCommand("items").setExecutor(new TestCommand());
         this.getCommand("grave").setExecutor(new TestCommandGraveyard());
@@ -75,6 +78,8 @@ public final class HardcoreReloaded extends JavaPlugin {
         cManager.saveData();
         Bukkit.getLogger().info("Saving bounties");
         bounty.saveData();
+        Bukkit.getLogger().info("Saving portals");
+        portalManager.saveData();
 
         sql.disconnect();
     }

@@ -32,7 +32,7 @@ public class Goblin extends Zombie {
         this.setCustomNameVisible(true);
         this.setCustomName(Component.literal("Kleiner Huso"));
         this.goalSelector.addGoal(0, new NearestAttackableTargetGoal<>(this, Player.class, true));
-        inv = Bukkit.createInventory(null, 9*4, "t");
+        inv = Bukkit.createInventory(null, 9*4, "");
     }
 
     public Inventory getInventory() {return inv;}

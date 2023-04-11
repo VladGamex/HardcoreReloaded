@@ -40,6 +40,10 @@ public class Bounty {
         pA.setPermission("hardcorereloaded.RadiusChecker", true);
     }
 
+    public void changeAmount(UUID uuid, double amount) {
+        bounties.put(uuid, bounties.get(uuid) + amount);
+    }
+
     public void removeBounty(UUID uuid) {
         bounties.remove(uuid);
         removePlayerFromInventory(uuid);

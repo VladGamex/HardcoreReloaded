@@ -1,6 +1,7 @@
 package de.gamexlive.hardcorereloaded.custom.events;
 
 import de.gamexlive.hardcorereloaded.HardcoreReloaded;
+import de.gamexlive.hardcorereloaded.custom.events.netherAttack.NetherAttack;
 import org.bukkit.Bukkit;
 
 import java.util.Random;
@@ -21,7 +22,9 @@ public class EventManager {
                     System.out.println(randomNumber);
                     if (randomNumber == 2) {
                         new BloodMoon();
-                    }
+                    } else if(randomNumber == 1) {
+                        new NetherAttack();
+                }
             }
         }, 0L, 20L * 60L * 5);
     }
