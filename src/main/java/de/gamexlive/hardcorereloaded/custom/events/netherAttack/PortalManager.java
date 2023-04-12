@@ -2,17 +2,15 @@ package de.gamexlive.hardcorereloaded.custom.events.netherAttack;
 
 import de.gamexlive.hardcorereloaded.sql.SQLGrabber;
 import org.bukkit.Location;
-import org.bukkit.block.BlockState;
 
 import java.util.ArrayList;
-import java.util.List;
+import java.util.HashMap;
 import java.util.Map;
-import java.util.UUID;
 
 public class PortalManager {
 
     private SQLGrabber grabber;
-    private Map<Integer, List<BlockState>> portals;
+    private Map<Integer, Location> portals;
 
 
     public PortalManager(SQLGrabber grabber) {
@@ -20,8 +18,8 @@ public class PortalManager {
         portals = grabber.getAllEntriesOfPortals();
     }
 
-    public void addNewPortal(int id, List<BlockState> blocks) {
-        portals.put(id, blocks);
+    public void addNewPortal(int id, Location loc) {
+        portals.put(id, loc);
     }
 
     public void removePortal(int id) {
@@ -30,16 +28,21 @@ public class PortalManager {
 
     public ArrayList<Location> getAllLocations() {
         ArrayList<Location> result = new ArrayList<>();
-        portals.forEach((key, value) -> {
-           result.add(value.get(0).getLocation());
-        });
+        portals.forEach((key, value) -> result.add(value));
         return result;
     }
 
 
     // Gute Frage wie mache ich das
     public void saveData() {
-        Map<Integer, List<BlockState>> allEntries = grabber.getAllEntriesOfPortals();
-
+        HashMap<Integer, Location> allEntries = grabber.getAllEntriesOfPortals();
+        for(Map.Entry<Integer, Location> entry : portals.entrySet()) {
+            if (allEntries.containsKey(entry.getKey())) {
+                allEntries.remove(entry);
+                portals.remove(entry);
+            }
+        }
+        allEntries.forEach((key, value) -> grabber.removeDataPortal(key));
+        portals.forEach((key, value) -> grabber.addDataPortal(key, value));
     }
 }

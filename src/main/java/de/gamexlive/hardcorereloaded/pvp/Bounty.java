@@ -4,14 +4,12 @@ import de.gamexlive.hardcorereloaded.HardcoreReloaded;
 import de.gamexlive.hardcorereloaded.sql.SQLGrabber;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
-import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.SkullMeta;
 import org.bukkit.permissions.PermissionAttachment;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
 
@@ -68,11 +66,12 @@ public class Bounty {
         for(Map.Entry<UUID, Double> entry : bounties.entrySet()) {
             if (allEntries.containsKey(entry.getKey())) {
                 grabber.updateDataBounties(entry.getKey(), entry.getValue());
+                allEntries.remove(entry);
                 bounties.remove(entry);
-            } else {
-                grabber.addDataBounties(entry.getKey(), entry.getValue());
             }
         }
+        allEntries.forEach((key, value) -> grabber.removeDataBounty(key));
+        bounties.forEach((key, value) -> grabber.addDataBounties(key, value));
     }
 
     public void addPlayerToInventory(UUID uuid, double amount) {

@@ -2,6 +2,7 @@ package de.gamexlive.hardcorereloaded;
 
 import de.gamexlive.hardcorereloaded.coins.CoinsManager;
 import de.gamexlive.hardcorereloaded.coins.commands.CommandGetCoins;
+import de.gamexlive.hardcorereloaded.custom.events.CommandStartEvent;
 import de.gamexlive.hardcorereloaded.custom.events.EventManager;
 import de.gamexlive.hardcorereloaded.custom.events.netherAttack.PortalManager;
 import de.gamexlive.hardcorereloaded.custom.items.ItemManager;
@@ -9,10 +10,7 @@ import de.gamexlive.hardcorereloaded.custom.items.TestCommand;
 import de.gamexlive.hardcorereloaded.custom.mobs.TestMobs;
 import de.gamexlive.hardcorereloaded.death.Graveyard;
 import de.gamexlive.hardcorereloaded.death.TestCommandGraveyard;
-import de.gamexlive.hardcorereloaded.listeners.EntityDamaged;
-import de.gamexlive.hardcorereloaded.listeners.InventoryClick;
-import de.gamexlive.hardcorereloaded.listeners.PlayerDisconnect;
-import de.gamexlive.hardcorereloaded.listeners.PlayerJoin;
+import de.gamexlive.hardcorereloaded.listeners.*;
 import de.gamexlive.hardcorereloaded.pvp.Bounty;
 import de.gamexlive.hardcorereloaded.pvp.commands.CommandCheckIfPlayerInRadius;
 import de.gamexlive.hardcorereloaded.pvp.commands.CommandGetBounties;
@@ -45,7 +43,7 @@ public final class HardcoreReloaded extends JavaPlugin {
             Bukkit.getLogger().info("Database is not connected");
         }
         if (sql.isConnected()) {
-            grabber = new SQLGrabber(this, sql);
+            grabber = new SQLGrabber(sql);
             graveyard = new Graveyard(grabber);
             Bukkit.getLogger().info("Database is connected");
         }
@@ -63,12 +61,14 @@ public final class HardcoreReloaded extends JavaPlugin {
         this.getCommand("coins").setExecutor(new CommandGetCoins());
         this.getCommand("bounties").setExecutor(new CommandGetBounties());
         this.getCommand("kleinerHuso").setExecutor(new TestMobs());
+        this.getCommand("startEvent").setExecutor(new CommandStartEvent());
 
         //Listeners
         Bukkit.getPluginManager().registerEvents(new EntityDamaged(), this);
         Bukkit.getPluginManager().registerEvents(new PlayerJoin(), this);
         Bukkit.getPluginManager().registerEvents(new PlayerDisconnect(), this);
         Bukkit.getPluginManager().registerEvents(new InventoryClick(), this);
+        Bukkit.getPluginManager().registerEvents(new PortalCreate(), this);
     }
 
     public void onDisable() {

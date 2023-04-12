@@ -9,8 +9,10 @@ public class PlayerJoin implements Listener {
 
     @EventHandler
     public void onPlayerJoin(PlayerJoinEvent event) {
-        if(HardcoreReloaded.cManager.contains(event.getPlayer().getUniqueId())) { System.out.println("contains"); return; }
-        HardcoreReloaded.cManager.addNewPlayer(event.getPlayer().getUniqueId());
+
+        if(!HardcoreReloaded.cManager.contains(event.getPlayer().getUniqueId())) {
+            HardcoreReloaded.cManager.addNewPlayer(event.getPlayer().getUniqueId());
+        }
         System.out.println(HardcoreReloaded.eventManager.ID);
         if(HardcoreReloaded.eventManager.ID == 0) {
             HardcoreReloaded.eventManager.activateTask();

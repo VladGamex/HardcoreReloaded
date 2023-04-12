@@ -17,3 +17,5 @@ commands:
     description: Bounties
   kleinerHuso:
     description: kleinerHuso
+  startEvent:
+    description: startEvent

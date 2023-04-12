@@ -19,13 +19,13 @@ public class EventManager {
             public void run() {
                     Random random = new Random();
                     int randomNumber = random.nextInt(10 - 1 + 1) + 1;
-                    System.out.println(randomNumber);
+                    //System.out.println(randomNumber);
                     if (randomNumber == 2) {
                         new BloodMoon();
                     } else if(randomNumber == 1) {
                         new NetherAttack();
-                }
+                    }
             }
-        }, 0L, 20L * 60L * 5);
+        }, 0L, 20L * 60L * 5L);
     }
 }

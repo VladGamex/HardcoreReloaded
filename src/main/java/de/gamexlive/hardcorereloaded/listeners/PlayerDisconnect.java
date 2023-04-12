@@ -10,7 +10,8 @@ public class PlayerDisconnect implements Listener {
 
     @EventHandler
     public void onPlayerDisconnect(PlayerQuitEvent event) {
-        if(Bukkit.getServer().getOnlinePlayers().size() < 1) {
+        System.out.println(Bukkit.getServer().getOnlinePlayers().size());
+        if(Bukkit.getServer().getOnlinePlayers().size() - 1 < 1) {
             Bukkit.getServer().getScheduler().cancelTask(HardcoreReloaded.eventManager.ID);
             HardcoreReloaded.eventManager.ID = 0;
 
