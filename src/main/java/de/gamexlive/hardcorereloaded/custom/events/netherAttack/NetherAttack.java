@@ -1,13 +1,11 @@
 package de.gamexlive.hardcorereloaded.custom.events.netherAttack;
 
 import de.gamexlive.hardcorereloaded.HardcoreReloaded;
+import de.gamexlive.hardcorereloaded.custom.mobs.PackLeader;
 import de.gamexlive.hardcorereloaded.custom.mobs.PackMember;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.craftbukkit.v1_19_R2.CraftWorld;
-import org.bukkit.craftbukkit.v1_19_R2.entity.CraftPiglinBrute;
-import org.bukkit.entity.EntityType;
-import org.bukkit.entity.PiglinBrute;
 import org.bukkit.scheduler.BukkitRunnable;
 
 import java.util.ArrayList;
@@ -29,16 +27,15 @@ public class NetherAttack {
 
     // Only spawn mobs in already loaded chunks
     public void spawnMobs(Location loc) {
-        PiglinBrute brute = (PiglinBrute) Bukkit.getServer().getWorld(loc.getWorld().getUID()).spawnEntity(loc, EntityType.PIGLIN_BRUTE);
-        brute.setImmuneToZombification(true);
-        PackMember test = new PackMember(loc, ((CraftPiglinBrute)brute).getHandle());
+        PackLeader leader = new PackLeader(loc);
+        ((CraftWorld) loc.getWorld()).getHandle().addFreshEntity(leader);
+        PackMember test = new PackMember(loc);
         for(int i = 0; i < 5; i++) {
             test.setImmuneToZombification(true);
             ((CraftWorld) loc.getWorld()).getHandle().addFreshEntity(test);
-            test = new PackMember(loc, ((CraftPiglinBrute) brute).getHandle());
+            test = new PackMember(loc);
 
         }
-        brute.setAI(true);
     }
 
 }

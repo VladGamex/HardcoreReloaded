@@ -4,8 +4,8 @@ import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.ai.goal.Goal;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
+import org.bukkit.Particle;
 import org.bukkit.craftbukkit.v1_19_R2.entity.CraftPiglinBrute;
-import org.bukkit.entity.PiglinBrute;
 
 import java.util.EnumSet;
 
@@ -22,8 +22,8 @@ public class PathfinderGoalFollowLeader extends Goal {
     private double e; // z
 
 
-    public PathfinderGoalFollowLeader(Mob a, double speed, float stopDistance) {
-        this.a = a;
+    public PathfinderGoalFollowLeader(Mob member, double speed, float stopDistance) {
+        this.a = member;
         this.f = speed;
         this.stopDistance = stopDistance;
         this.setFlags(EnumSet.of(Flag.MOVE));
@@ -34,9 +34,16 @@ public class PathfinderGoalFollowLeader extends Goal {
         if(this.b == null) {
             Location loc = new Location(Bukkit.getWorld("world"), this.a.getX(), this.a.getY(), this.a.getZ());
             for (org.bukkit.entity.Entity ent : loc.getWorld().getNearbyEntities(loc, 15, 15, 15)) {
-                if (ent instanceof PiglinBrute) {
-                    this.b = ((CraftPiglinBrute) ent).getHandle();
+                if (ent.isCustomNameVisible()) {
+                    if(ent.getCustomName().equals("Leader")) {
+                        this.b = ((CraftPiglinBrute) ent).getHandle();
+                    }
                 }
+            }
+            if(this.b == null) {
+                    this.a.kill();
+                    loc.getWorld().spawnParticle(Particle.CLOUD, loc.getX(), loc.getY(), loc.getZ(), 0);
+
             }
             return false;
         } else {

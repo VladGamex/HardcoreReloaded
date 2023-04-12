@@ -2,6 +2,7 @@ package de.gamexlive.hardcorereloaded.custom.events.netherAttack;
 
 import de.gamexlive.hardcorereloaded.sql.SQLGrabber;
 import org.bukkit.Location;
+import org.bukkit.util.BoundingBox;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -11,6 +12,7 @@ public class PortalManager {
 
     private SQLGrabber grabber;
     private Map<Integer, Location> portals;
+    private Map<Integer, BoundingBox> portalsNew;
 
 
     public PortalManager(SQLGrabber grabber) {
@@ -20,6 +22,10 @@ public class PortalManager {
 
     public void addNewPortal(int id, Location loc) {
         portals.put(id, loc);
+    }
+
+    public void addNewPortal(int id, BoundingBox box) {
+        portalsNew.put(id, box);
     }
 
     public void removePortal(int id) {

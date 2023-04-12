@@ -57,10 +57,10 @@ public class SQLGrabber {
             set = statement.executeQuery();
             while(set.next()) {
                 Location loc = new Location(Bukkit.getWorld("world"),
+                        Double.parseDouble(set.getString(1)),
                         Double.parseDouble(set.getString(2)),
-                        Double.parseDouble(set.getString(3)),
-                        Double.parseDouble(set.getString(4)));
-                result.put(set.getInt(1), loc);
+                        Double.parseDouble(set.getString(3)));
+                result.put(set.getInt(4), loc);
             }
         } catch (SQLException exception) {
             exception.printStackTrace();

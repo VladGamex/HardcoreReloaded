@@ -10,7 +10,7 @@ public class PortalCreate implements Listener {
     @EventHandler
     public void onPortalCreate(PortalCreateEvent event) {
         System.out.println("TEST");
-        HardcoreReloaded.portalManager.addNewPortal(0, event.getBlocks().get(0).getLocation());
+        HardcoreReloaded.portalManager.addNewPortal(HardcoreReloaded.portalManager.getAllLocations().size(), event.getBlocks().get(0).getLocation());
        // Block b = Bukkit.getWorld("world").getBlockState()
     }
 }
